@@ -739,16 +739,15 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 
 <div class="mermaid">
 flowchart TD
-    A[RTL Core: 64 KB single SRAM macro, HWC data layout] --> B[Physical Design: macro aspect ratio fractures floorplan]
-    A --> C[Packaging: 48 mA burst current in 4x4 QFN]
-    A --> D[Software: CHW audio features need HWC reorder]
-    B --> E[Area 0.85 to 1.35 mm2: over 1.0 mm2 budget]
-    C --> F[Ground bounce over 70 mV: corrupts host MCU registers]
-    D --> G[180k CPU cycles per window: +6.2 mW]
-    E --> H[Project fails: 11 mW vs 5 mW envelope]
+    A["RTL Core: 64 KB single SRAM macro, HWC data layout"] --> B["Physical Design: macro aspect ratio fractures floorplan"]
+    A --> C["Packaging: 48 mA burst current in 4x4 QFN"]
+    A --> D["Software: CHW audio features need HWC reorder"]
+    B --> E["Area 0.85 to 1.35 mm2: over 1.0 mm2 budget"]
+    C --> F["Ground bounce over 70 mV: corrupts host MCU registers"]
+    D --> G["180k CPU cycles per window: +6.2 mW"]
+    E --> H["Project fails: 11 mW vs 5 mW envelope"]
     F --> H
-    G --> H
-</div>
+    G --> H</div>
 
 <p>Marcus was an expert in SystemVerilog. He knew how to balance pipeline depths, avoid inferred latches, and maximize toggle coverage. And the silicon still failed to become a product, because he believed what the interfaces told him: that his job ended at the RTL. That belief has run digital design for two decades. Architects write specifications. RTL teams implement microarchitectures. Verification engineers build universal verification methodology (UVM) environments. Backend engineers push gates through place-and-route. And embedded software engineers deal with whatever register map gets thrown over the wall at the end of the schedule.</p>
 
@@ -817,7 +816,7 @@ A working RTL simulation is not a chip; a functional die is not an IP core; and 
 
 <div class="mermaid">
 flowchart LR
-    A[MAC Array Size] --> B[Area & Power]
+    A[MAC Array Size] --> B["Area & Power"]
     A --> C[Memory Bandwidth]
     B --> D[Package Choice]
     C --> E[SRAM Macro Shape]
@@ -826,8 +825,7 @@ flowchart LR
     D --> G[Unit Cost]
     B --> H[Battery Life]
     G --> I[Market Fit]
-    H --> I
-</div>
+    H --> I</div>
 
 <p>Four trade-offs. In each one, a local optimization becomes a system-level failure, and the whole-flow view finds the right compromise.</p>
 
@@ -867,13 +865,12 @@ flowchart LR
 
 <div class="mermaid">
 flowchart TD
-    A[RTL team: double MAC array for speed] --> B[Latency 10 ms to 5 ms]
+    A["RTL team: double MAC array for speed"] --> B[Latency 10 ms to 5 ms]
     B --> C[Area +35%, power +60%]
-    C --> D[Package: QFN to fine-pitch BGA]
+    C --> D["Package: QFN to fine-pitch BGA"]
     D --> E[Unit cost up, battery life down]
-    E --> F[Customer value: zero, audio frames arrive every 20-100 ms]
-    F --> G[System-level failure from a local win]
-</div>
+    E --> F["Customer value: zero, audio frames arrive every 20-100 ms"]
+    F --> G[System-level failure from a local win]</div>
 
 <p>Each discipline optimizes for what its own tools report:</p>
 <ul>
@@ -1035,8 +1032,7 @@ flowchart TD
     D4 -.->|silicon vs. model| B2
     D4 -.->|characterization| B3
     D1 -.->|timing closure| B1
-    E1 -.->|yield and DPPM| A3
-</div>
+    E1 -.->|yield and DPPM| A3</div>
 
 <p><strong>Figure 1.1 — The idea-to-silicon flow.</strong> Thirteen stages, five parts, one design carried all the way through — with power intent (Chapter 7) running through Part II, where the power architecture is decided. The solid arrows are the forward flow; the dotted arrows are the feedback loops that make it engineering rather than a waterfall: silicon measurements correct the RTL and the DFT strategy, synthesis results reshape the architecture, and production yield reopens the requirements. Chapter numbers are the chapters of this book.</p>
 
@@ -1153,16 +1149,16 @@ flowchart LR
         subgraph NPU["TinyEdge-NPU Subsystem"]
             AXIL[AXI-Lite Slave Control]
             AXI[AXI4 Master DMA]
-            Ctrl[Execution & Sequence Controller]
+            Ctrl["Execution & Sequence Controller"]
             
             subgraph Memory["Tightly Coupled SRAM (M configuration)"]
-                W_SRAM[Weight Buffer<br/>64 KB (M)]
-                A_SRAM[Activation Scratchpad<br/>32 KB (M)]
+                W_SRAM["Weight Buffer<br/>64 KB (M)"]
+                A_SRAM["Activation Scratchpad<br/>32 KB (M)"]
             end
             
             subgraph Compute["Datapath Array"]
                 MAC[64 INT8 Parallel MAC Units<br/>8x8 Compute Mesh]
-                ACC[32-Bit Accumulators<br/>& Re-Quantization]
+                ACC["32-Bit Accumulators<br/>& Re-Quantization"]
             end
             
             AXIL --> Ctrl
@@ -1174,8 +1170,7 @@ flowchart LR
         
         NPU -->|Interrupt / Wakeup| MCU[Host System MCU<br/>Cortex-M0+ / RISC-V]
         MCU -->|Inference Status| Cloud[Secure Uplink / BLE]
-    end
-</div>
+    end</div>
 
 <p>Here are the design's parameters, so every chapter works from the same numbers:</p>
 
@@ -1430,19 +1425,18 @@ flowchart LR
 
 <div class="mermaid">
 flowchart TD
-    A[Global Edge IoT & Sensor SoC Market] --> B{Power & Area Filter}
-    B -- Exceeds Budget --> C[Reject: High-Power Vision/Server Acceleration]
-    B -- &lt;5 mW, ~1 mm2 in 28nm --> D[Target SAM: Battery-Powered Acoustic & Voice Nodes]
-    D --> E[Map Customer Pain Points: KWS Latency vs. Battery Life]
+    A["Global Edge IoT & Sensor SoC Market"] --> B{Power & Area Filter}
+    B -- Exceeds Budget --> C["Reject: High-Power Vision/Server Acceleration"]
+    B -- &lt;5 mW, ~1 mm2 in 28nm --> D["Target SAM: Battery-Powered Acoustic & Voice Nodes"]
+    D --> E["Map Customer Pain Points: KWS Latency vs. Battery Life"]
     E --> F{Architecture Sizing}
-    F -- Too Complex --> G[Reject: FP16 Logic & Off-Chip DRAM Dependency]
-    F -- Canonical Spec --> H[Validate: 64-MAC INT8 + 96 KB SRAM (M)]
+    F -- Too Complex --> G["Reject: FP16 Logic & Off-Chip DRAM Dependency"]
+    F -- Canonical Spec --> H["Validate: 64-MAC INT8 + 96 KB SRAM (M)"]
     H --> I[Analyze Competitive Alternatives]
     I --> J{Select Beachhead Segment}
-    J -- Broad Push --> K[Failure: Horizontal Messaging to 'Everyone']
-    J -- Focused Niche --> L[Beachhead: Battery-Powered Always-On Voice Remotes]
-    L --> M[Commercial Scale & Domain Expansion]
-</div>
+    J -- Broad Push --> K["Failure: Horizontal Messaging to 'Everyone'"]
+    J -- Focused Niche --> L["Beachhead: Battery-Powered Always-On Voice Remotes"]
+    L --> M["Commercial Scale & Domain Expansion"]</div>
 
 <h3 id="ch02-sec-3">Competition and Beachhead Selection</h3>
 
@@ -1596,17 +1590,16 @@ flowchart TD
 flowchart TD
     A[Raw Customer Interviews] --> B[Separate Stated vs. Revealed Constraints]
     B --> C[Extract Discrete Pain Points]
-    C --> D[Score Severity: 1 to 5]
-    C --> E[Score Frequency: 1 to 5]
-    C --> F[Score Willingness to Pay: 1 to 5]
-    D --> G[Calculate: Severity x Frequency x WTP]
+    C --> D["Score Severity: 1 to 5"]
+    C --> E["Score Frequency: 1 to 5"]
+    C --> F["Score Willingness to Pay: 1 to 5"]
+    D --> G["Calculate: Severity x Frequency x WTP"]
     E --> G
     F --> G
     G --> H{Score Evaluation}
     H -->|Score >= 60| I[P0 Architecture Requirement]
     H -->|30 <= Score < 60| J[P1 Competitive Differentiator]
-    H -->|Score < 30| K[P2 Backlog / Deferred Feature]
-</div>
+    H -->|Score < 30| K[P2 Backlog / Deferred Feature]</div>
 
 <h4>Discovery Dialogue: Home Security SoC Architect</h4>
 
@@ -1800,17 +1793,16 @@ Saving 50&nbsp;mW with a micro-NPU is irrelevant to its run-time. And robotics a
 
 <div class="mermaid">
 flowchart TD
-    A[Complete research: pain, sizing, competition, beachhead] --> B[Score the seven dimensions 1-5]
+    A["Complete research: pain, sizing, competition, beachhead"] --> B[Score the seven dimensions 1-5]
     B --> C[Compute weighted total]
     C --> D{Weighted score?}
-    D -- "≥ 4.0" --> E[GO: fund product definition, baseline spec]
-    D -- "3.0 – 3.9" --> F[CONDITIONAL GO: name the fix + deadline]
+    D -- "≥ 4.0" --> E["GO: fund product definition, baseline spec"]
+    D -- "3.0 – 3.9" --> F["CONDITIONAL GO: name the fix + deadline"]
     F --> G{Condition met in time?}
     G -- Yes --> E
-    G -- No --> H[NO-GO: stop, record reasons]
+    G -- No --> H["NO-GO: stop, record reasons"]
     D -- "&lt; 3.0" --> H
-    E --> I[Proceed to Chapter 3: requirements]
-</div>
+    E --> I["Proceed to Chapter 3: requirements"]</div>
 
 <h4>The TinyEdge-NPU Decision</h4>
 
@@ -1900,16 +1892,15 @@ A requirement is not a wish, a marketing claim, or an architectural preference. 
 
 <div class="mermaid">
 flowchart TD
-    A[Market Finding] --> B[Requirement: ID + shall + number + condition]
+    A[Market Finding] --> B["Requirement: ID + shall + number + condition"]
     B --> C[Architecture Decision]
-    B --> D[Verification Plan: test + method]
+    B --> D["Verification Plan: test + method"]
     C --> E[RTL Implementation]
-    D --> F[Coverage & Sign-off]
+    D --> F["Coverage & Sign-off"]
     E --> G{Does the test pass?}
     G -- Yes --> H[Requirement closed]
     G -- No --> I[Change RTL or renegotiate requirement]
-    I --> B
-</div>
+    I --> B</div>
 
 <p>The diagram above is the whole discipline in one picture. A market finding becomes a numbered requirement. The requirement drives the architecture and the verification plan in parallel. The verification result either closes the requirement or forces an explicit renegotiation. Nothing in this loop is optional, and nothing bypasses the requirement. Not a clever microarchitectural shortcut. Not a schedule-driven decision to skip a test.</p>
 
@@ -2647,16 +2638,15 @@ P_avg = (0.002797 mJ + 0.064953 mJ) / 1 s = 0.0678 mW = 67.8 µW
 
 <div class="mermaid">
 flowchart TD
-    A[Requirements: &lt;5 mW, ~1 mm2, real-time KWS] --> B[Characterize workload: DS-CNN layers, MACs, activation sizes]
-    B --> C[Analytical model: roofline, MAC sizing, SRAM sizing]
+    A["Requirements: &lt;5 mW, ~1 mm2, real-time KWS"] --> B["Characterize workload: DS-CNN layers, MACs, activation sizes"]
+    B --> C["Analytical model: roofline, MAC sizing, SRAM sizing"]
     C --> D{Meets power, area, latency budgets?}
-    D -- No --> E[Adjust: array size, SRAM, frequency, precision]
+    D -- No --> E["Adjust: array size, SRAM, frequency, precision"]
     E --> C
     D -- Yes --> F[Cycle-accurate simulation of critical layers]
     F --> G{Utilization and energy confirmed?}
     G -- No --> E
-    G -- Yes --> H[Freeze architecture: MAS + ADRs]
-</div>
+    G -- Yes --> H["Freeze architecture: MAS + ADRs"]</div>
 
 <h3 id="ch04-sec-3">4.3 Dataflow: Weight Stationary vs. Output Stationary</h3>
 
@@ -2683,9 +2673,8 @@ flowchart LR
         O1[Partial sums held in PE registers] --> O2[Weights stream through array]
         O2 --> O3[Results drained when complete]
     end
-    WS -.->|Best for: 1x1 pointwise layers| H[Hybrid: TinyEdge-NPU switches per layer]
-    OS -.->|Best for: 3x3 depthwise layers| H
-</div>
+    WS -.->|Best for: 1x1 pointwise layers| H["Hybrid: TinyEdge-NPU switches per layer"]
+    OS -.->|Best for: 3x3 depthwise layers| H</div>
 
 <h4>4.3.1 Defining Dataflow: The Loop-Nest Mapping Problem</h4>
 
@@ -3127,13 +3116,13 @@ flowchart TD
     end
     subgraph NPU[TinyEdge-NPU]
         FSM[Control FSM]
-        WB[Weight buffer 128 KB (L)]
-        AB[Activation buffer 64 KB (L)]
-        BS[Bias / scratch 8 KB (L)]
+        WB["Weight buffer 128 KB (L)"]
+        AB["Activation buffer 64 KB (L)"]
+        BS["Bias / scratch 8 KB (L)"]
         subgraph MAC[MAC array 8x8]
             PE[64 INT8 PEs, 32-bit accumulate]
         end
-        PP[Post-processing: requant, ReLU, pooling]
+        PP["Post-processing: requant, ReLU, pooling"]
     end
     AXIL --> FSM
     DMA --> WB
@@ -3145,8 +3134,7 @@ flowchart TD
     AB --> MAC
     BS --> PP
     MAC --> PP
-    PP --> AB
-</div>
+    PP --> AB</div>
 
 <h3 id="ch04-sec-4">4.4 MAC Array Sizing</h3>
 
@@ -4343,13 +4331,13 @@ flowchart TD
         MEM[System Memory]
     end
     subgraph NPU["TinyEdge-NPU"]
-        AXIL[AXI-Lite Slave\nConfig &amp; Control]
+        AXIL["AXI-Lite Slave\nConfig &amp; Control"]
         DMA[AXI4 DMA Engine]
         CTRL[Control FSM\nLayer Sequencer]
         MAC[8x8 MAC Array\nINT8, 32-bit acc]
-        WB[Weight Buffer\n128 KB SRAM (L)]
-        AB[Activation Buffer\n64 KB ping-pong (L)]
-        SB[Scratchpad\n8 KB bias/scale (L)]
+        WB["Weight Buffer\n128 KB SRAM (L)"]
+        AB["Activation Buffer\n64 KB ping-pong (L)"]
+        SB["Scratchpad\n8 KB bias/scale (L)"]
         QUANT[Quantization\nRequant Unit]
     end
     CPU -->|AXI-Lite| AXIL
@@ -4364,8 +4352,7 @@ flowchart TD
     MAC --> QUANT
     QUANT --> AB
     MAC --> SB
-    CTRL -->|interrupt| CPU
-</div>
+    CTRL -->|interrupt| CPU</div>
 <p>The partition is deliberately shallow: eight blocks, one clock domain, one reset domain. A small accelerator does not need the multi-clock, multi-power-domain complexity of a large SoC. That complexity is a cost, not a feature. The only clock-domain crossing in the design is the AXI-Lite slave, which runs on the host bus clock; everything else runs on the single 100&nbsp;MHz NPU clock. Keeping the CDC surface to one boundary makes the design dramatically easier to verify, to time, and to test.</p>
 
 <h3 id="ch05-sec-2">5.2 Coding Guidelines for Synthesizable, Reusable IP</h3>
@@ -4496,8 +4483,7 @@ flowchart LR
     P01 --> ACC1[acc col 1]
     P11 --> ACC1
     ACC0 --> Q[Requant\nunit]
-    ACC1 --> Q
-</div>
+    ACC1 --> Q</div>
 
 <h4>The requantization unit: where INT32 becomes INT8 again</h4>
 <p>The MAC array produces 32-bit accumulations; the next layer needs 8-bit activations. The requantization unit is the bridge, and it is the block where numerical correctness is most easily lost. Its job is three operations in order: add the per-channel bias, multiply by the per-channel scale factor, and saturate-and-round to INT8. Each operation has a trap. The bias must be added at full 32-bit width before any scaling. Adding it after the scale changes the result by more than a rounding error on layers with large biases. The scale multiplication is a fixed-point multiply by a per-channel multiplier (typically a 16-bit value with an associated shift), and the shift must be applied after the multiply, not before, or the low bits of the product are lost. The final saturation must clamp to the INT8 range (-128 to +127) with round-to-nearest, not truncation: truncation introduces a systematic negative bias that accumulates across layers and costs measurable accuracy on the keyword-spotting model. The TinyEdge-NPU team measured a 0.4% accuracy drop from truncation alone, which is a quarter of the total accuracy budget.</p>
@@ -4644,14 +4630,13 @@ end</code></pre>
 <p>Power gating the logic is the last step and the most expensive to verify. The MAC array and the requantization unit sit in a switchable power domain with isolation cells on every output and retention registers on the configuration state. The power switch is controlled by the system power manager, not by the NPU itself. The NPU requests a power state change through a status bit, and the system grants it. This keeps the power-sequencing logic in one place (the system) rather than distributed across the IP, which is the single biggest source of power-management bugs in small accelerators.</p>
 <div class="mermaid">
 flowchart TD
-    ACTIVE[Active\n&lt;5 mW] -->|layer done,\nidle &gt; 1 ms| LSLEEP[Light sleep\nbanks retained]
+    ACTIVE["Active\n&lt;5 mW"] -->|layer done,\nidle &gt; 1 ms| LSLEEP[Light sleep\nbanks retained]
     LSLEEP -->|new inference| ACTIVE
-    LSLEEP -->|idle &gt; 100 ms| DSLEEP[Deep sleep\n&lt;100 uW]
+    LSLEEP -->|idle &gt; 100 ms| DSLEEP["Deep sleep\n&lt;100 uW"]
     DSLEEP -->|wake event| WAKE[Wake + restore\nscratchpad kept]
     WAKE --> ACTIVE
     ACTIVE -->|system off| OFF[Power off]
-    OFF -->|power on| WAKE
-</div>
+    OFF -->|power on| WAKE</div>
 <table>
 <thead>
 <tr><th>Technique</th><th>Where applied</th><th>Typical saving</th><th>Cost</th></tr>
@@ -4754,8 +4739,7 @@ flowchart LR
     TM[Test Mode] --> MUX[Scan mux\nselect]
     MUX --> F1
     MUX --> F2
-    MUX --> F3
-</div>
+    MUX --> F3</div>
 
 <h3 id="ch06-sec-3">6.3 Memory BIST: Testing 200 KB of SRAM (L Configuration)</h3>
 <p>SRAM does not scan. A memory's internal bitcells and sense amplifiers cannot be reached by shifting patterns through flip-flops, so memories need their own test mechanism: built-in self-test (BIST). A BIST controller sits next to each SRAM bank and, in test mode, runs a march algorithm over the memory, writing and reading patterns that detect stuck-at faults, transition faults, coupling faults between neighbouring cells, and address-decoder faults, and reports a pass/fail signature. The controller is small (a few hundred gates per bank) and it is shared where possible: one controller serves the 8 weight banks sequentially, and a second serves the 2 activation banks and the scratchpad.</p>
@@ -4796,8 +4780,7 @@ flowchart TD
     PMON --> MARCH
     ATPG --> COV[Coverage sign-off\n≥99% stuck-at, ≥95% transition]
     MARCH --> COV
-    BSCAN --> COV
-</div>
+    BSCAN --> COV</div>
 <table>
 <thead>
 <tr><th>Structure</th><th>Scope</th><th>Coverage target</th><th>Test time</th></tr>
@@ -5019,17 +5002,16 @@ flowchart TD
     VDD_AON --> SRAM_RET[SRAM retention rail<br/>DRV 0.65 V]
     HDR -->|sleep_b low| VDD_CORE[VDD_CORE rail<br/>switched]
     VDD_CORE --> MAC[8x8 MAC array]
-    VDD_CORE --> DP[Datapath &amp; accumulators]
+    VDD_CORE --> DP["Datapath &amp; accumulators"]
     VDD_CORE --> CFG[Config registers<br/>main flops]
     VDD_CORE --> SRAM_PER[SRAM periphery]
-    SRAM_RET --> SRAM_ARR[SRAM bitcell arrays<br/>weights &amp; activations]
+    SRAM_RET --> SRAM_ARR["SRAM bitcell arrays<br/>weights &amp; activations"]
     PMU -->|sleep_b| HDR
     PMU -->|iso_en| ISO
     PMU -->|ret_save / ret_restore| RET
     VSS[VSS common ground<br/>never switched] --> MAC
     VSS --> PMU
-    VSS --> SRAM_ARR
-</div>
+    VSS --> SRAM_ARR</div>
 <p>The supply architecture has one input rail and one decision: everything that must survive a power-down hangs off <code>VDD_AON</code>, and everything else hangs off <code>VDD_CORE</code> behind the header switch. The header is a PMOS device (Chapter&nbsp;12), so the switched rail is pulled up to <code>VDD_AON</code> through the switch when it conducts; the on-resistance is under 0.4&nbsp;&Omega;, which keeps the IR drop under 6&nbsp;mV at the 18&nbsp;mA peak current, small enough that the timing sign-off at the SS/0.81&nbsp;V corner (Chapter&nbsp;11) does not need a separate switch-drop derating. Ground is common and never switched: a single continuous <code>VSS</code> plane keeps the substrate quiet and the retention latches free of back-bias shifts, which is the reason the design uses PMOS headers rather than NMOS footers.</p>
 <p>The two derived rails are worth naming precisely, because they are where the retention story lives. <code>VDD_RET</code> is the retention rail for the 284 balloon latches, derived from <code>VDD_AON</code> inside the retention cells; it is not a package pin and not a separate supply net in the UPF. It appears only as the retention power net of the retention strategy. The SRAM retention rail is the same idea at a larger scale: each bank's bitcell array is tied to an internal rail clamped to the 0.65&nbsp;V data-retention voltage by diode regulators, while the bank's periphery runs on switchable <code>VDD_CORE</code> and is powered down in sleep, a split that cuts SRAM leakage by 78% while preserving every weight (Chapter&nbsp;12).</p>
 
@@ -5356,8 +5338,7 @@ flowchart LR
     SEQ --> ISO
     UPF --> ISO
     TB -->|"assertions gate"| ISO
-    CAL -.->|"tau, thresholds, C_dec"| RNM
-</div>
+    CAL -.->|"tau, thresholds, C_dec"| RNM</div>
 <p>The claim, stated plainly: the power sequence is a mixed-signal property, and it is verified as one. The UPF states the intent, the formal properties prove the logic, and the real-number model proves the physics, in the same testbench, on the same runs, driven by the same sequencer. A wake-up that passes all three has a rail that reached 0.81&nbsp;V in time, an isolation release that waited for it, and a switch under its current cap. A wake-up that passes only the first two is logically correct and physically unproven, the state §7.4.2 warned about, and the reason this section exists.</p>
 </section>
 
@@ -5454,8 +5435,7 @@ flowchart TD
     SVA --> SIGN[Sign-off Criteria]
     COV --> SIGN
     TEST --> SIGN
-    SIGN -.-> PRD
-</div>
+    SIGN -.-> PRD</div>
 
 <h4>8.1.1 Structure of the Verification Plan (vPlan)</h4>
 
@@ -5642,8 +5622,7 @@ flowchart TD
     CODE[Structural Code Coverage<br/>Line, Branch, Toggle, FSM] --> CLOSE[Coverage Closure]
     ASSERT[Assertion Coverage<br/>SVA Pass and Cover] --> CLOSE
     FUNC[Functional Coverage<br/>Covergroups and Coverpoints] --> CLOSE
-    CLOSE --> SIGNOFF[Sign-off: All Three Axes at Target]
-</div>
+    CLOSE --> SIGNOFF["Sign-off: All Three Axes at Target"]</div>
 
 <h4>8.2.1 Functional Coverage Metrics</h4>
 
@@ -5904,7 +5883,7 @@ The verification hierarchy must establish a strict division of responsibility: b
 
 <div class="mermaid">
 flowchart TD
-    subgraph SystemLevel [System-Level Verification: SoC / Subsystem Environment]
+    subgraph SystemLevel ["System-Level Verification: SoC / Subsystem Environment"]
         HostFW[Embedded Firmware / Host Driver] -->|AXI Master / CSR Writes| BusMatrix[System Interconnect / AXI Fabric]
         ExtDRAM[External DRAM Memory Model] <-->|AXI DMA Bursts| BusMatrix
         BusMatrix <-->|Slave Port & Master DMA| NPU_Top[TinyEdge-NPU Top-Level Wrapper]
@@ -5912,15 +5891,14 @@ flowchart TD
         NPU_Top -->|P-Channel / Q-Channel| PMU[Power Management Unit Model]
     end
 
-    subgraph BlockLevel [Block-Level Verification: Unit Testbenches]
-        UVM_MAC[MAC Array UVM TB] -->|Direct Drives| MAC[64-MAC Datapath (8x8)]
+    subgraph BlockLevel ["Block-Level Verification: Unit Testbenches"]
+        UVM_MAC[MAC Array UVM TB] -->|Direct Drives| MAC["64-MAC Datapath (8x8)"]
         UVM_BUF[Buffer UVM TB] -->|Arb & Hazard Vectors| SRAM_Banks[Ping-Pong Activation/Weight SRAMs]
         UVM_DMA[DMA Engine UVM TB] -->|AXI Protocol Stress| DMA_Core[Scatter-Gather DMA Engine]
         UVM_CTRL[Control FSM UVM TB] -->|State Transition Stress| FSM[Loop-Nest Tile Controller]
     end
 
-    BlockLevel -.->|Reusable Sequences & Checkers| SystemLevel
-</div>
+    BlockLevel -.->|Reusable Sequences & Checkers| SystemLevel</div>
 
 <h4>Block-Level Verification: Microarchitectural Exhaustion</h4>
 <p>
@@ -6068,20 +6046,19 @@ The TinyEdge-NPU reference model is implemented as a modular, object-oriented Py
 
 <div class="mermaid">
 flowchart LR
-    InAct[Input Tensor: INT8 Activations] --> Tiler[Buffer Tiling Engine]
-    InWgt[Input Weights: INT8 / INT4] --> Tiler
-    Tiler --> SpatialPE[Spatial Array Engine: 64x INT8 MACs (8x8)]
+    InAct["Input Tensor: INT8 Activations"] --> Tiler[Buffer Tiling Engine]
+    InWgt["Input Weights: INT8 / INT4"] --> Tiler
+    Tiler --> SpatialPE["Spatial Array Engine: 64x INT8 MACs (8x8)"]
     SpatialPE --> Acc32[32-Bit Accumulator Stage]
-    Acc32 --> Requant[Requantization Unit: Mult, Shift, Round, Sat]
-    Requant --> OutAct[Output Tensor: INT8 Feature Map]
+    Acc32 --> Requant["Requantization Unit: Mult, Shift, Round, Sat"]
+    Requant --> OutAct["Output Tensor: INT8 Feature Map"]
 
-    subgraph GoldenModel [TinyEdge Golden Reference Model Engine]
+    subgraph GoldenModel ["TinyEdge Golden Reference Model Engine"]
         Tiler
         SpatialPE
         Acc32
         Requant
-    end
-</div>
+    end</div>
 
 <p>
 The model encapsulates four sequential stages:
@@ -6361,8 +6338,7 @@ flowchart TB
     SENSOR_AGT -.->|Stream Samples| REF_MDL
     DMA_AGT -.->|Monitored Tensors| SCB
     DUT -.->|Monitored Interrupts/AXI| SCB
-    REF_MDL -->|Expected Tensors| SCB
-</div>
+    REF_MDL -->|Expected Tensors| SCB</div>
 
 <p>The environment contains the following dedicated agents:</p>
 <ul>
@@ -6512,25 +6488,25 @@ endfunction</code></pre>
 
 <div class="mermaid">
 graph TD
-    subgraph TinyEdge_NPU [TinyEdge-NPU RTL Scope]
+    subgraph TinyEdge_NPU ["TinyEdge-NPU RTL Scope"]
         FSM[Layer Control FSM]
         BUS[AXI Bus Interface]
-        PTR[Buffer Flow & Pointers]
+        PTR["Buffer Flow & Pointers"]
         PWR[Power State Controller]
         DMA[DMA Controller]
         DP[INT8 MAC Array]
         ACC[32-bit Accumulators]
-        ACT[Quantization & ReLU Engine]
+        ACT["Quantization & ReLU Engine"]
     end
 
-    subgraph Formal_Verification [Formal Property Verification]
-        F_FSM[Exhaustive Reachability & Deadlock Proofs]
+    subgraph Formal_Verification ["Formal Property Verification"]
+        F_FSM["Exhaustive Reachability & Deadlock Proofs"]
         F_BUS[Protocol Compliance AIP]
-        F_PTR[FIFO Invariant & Underflow/Overflow Proofs]
-        F_PWR[Power Isolation & Gating Sequencing]
+        F_PTR["FIFO Invariant & Underflow/Overflow Proofs"]
+        F_PWR["Power Isolation & Gating Sequencing"]
     end
 
-    subgraph Dynamic_Simulation [Dynamic Simulation & Reference Model]
+    subgraph Dynamic_Simulation ["Dynamic Simulation & Reference Model"]
         S_DP[Layer Math Bit-Accuracy Scoreboard]
         S_DMA[Long Real-Memory Stream Burst Profiling]
         S_NET[Full Neural Net KWS Inference Validation]
@@ -6544,8 +6520,7 @@ graph TD
     ACC --> S_DP
     ACT --> S_DP
     DMA --> S_DMA
-    TinyEdge_NPU --> S_NET
-</div>
+    TinyEdge_NPU --> S_NET</div>
 
 <h4>What NOT to Formalize: The Datapath Boundary</h4>
 <p>A frequent error among teams adopting formal methods is attempting to verify end-to-end mathematical correctness through formal equivalence of the MAC array. Exhaustively proving that an 8&times;8 INT8 spatial array calculates <code>D = &sum;(A &times; B) + C</code> across multiple pipeline stages creates an explosion of Boolean Satisfiability (SAT) and Binary Decision Diagram (BDD) complexity. Multipliers are notoriously difficult for SAT solvers due to exponential branch paths. The MAC datapath, post-MAC scaling, clipping, and ReLU operators should be excluded from formal engines. Bit-accurate arithmetic verification belongs strictly to constrained-random UVM simulation checked against the golden C++/Python fixed-point model.</p>
@@ -6746,12 +6721,11 @@ flowchart TD
     Q1 -->|Firmware interaction| FPGA
     Q1 -->|Customer confidence| FPGA
     Q1 -->|Logic correctness only| SKIP[Skip prototype<br/>Go to synthesis]
-    FPGA --> DEMO[Live demo:<br/>mic → keyword → action]
+    FPGA --> DEMO["Live demo:<br/>mic → keyword → action"]
     FPGA --> MEAS[Measured latency<br/>power, accuracy]
     DEMO --> SIGN[Prototype sign-off]
     MEAS --> SIGN
-    SIGN --> CH10[Chapter 11: Synthesis]
-</div>
+    SIGN --> CH10["Chapter 11: Synthesis"]</div>
 
 <h4>9.1.1 What a Prototype Proves — and What It Does Not</h4>
 
@@ -6892,9 +6866,8 @@ flowchart LR
     end
     MIC[Microphone<br/>PDM / I2S] --> FEAT
     DRV ---|AXI-Lite| REG
-    DMA ---|AXI HP port| DDR[(Board DDR<br/>weights + audio)]
-    APP --> LED[LED / UART log<br/>detection output]
-</div>
+    DMA ---|AXI HP port| DDR["(Board DDR<br/>weights + audio)"]
+    APP --> LED[LED / UART log<br/>detection output]</div>
 
 <h4>9.2.2 Clocking, Resets, and the FPGA-Specific Compromises</h4>
 
@@ -6978,8 +6951,7 @@ flowchart LR
     DMA --> NPU[TinyEdge-NPU<br/>DS-CNN inference]
     NPU --> PROB[12-class<br/>probabilities]
     PROB --> THR[Threshold +<br/>2-frame smoothing]
-    THR --> OUT[LED + UART log<br/>+ GPIO wake pulse]
-</div>
+    THR --> OUT[LED + UART log<br/>+ GPIO wake pulse]</div>
 
 <p>The end-to-end latency budget is the number the demo lives or dies by. The product-level target, not a Chapter 3 requirement, is that a keyword is detected within 500&nbsp;ms of the end of the spoken word, fast enough that the user perceives the response as immediate. (Chapter 3's requirement is narrower: REQ-P-001 bounds the <em>inference</em> at under 12&nbsp;ms at the 20&nbsp;MHz nominal clock; see Section 9.4.4 for how the measured numbers relate to it.) The budget decomposes as follows: 10&nbsp;ms for the final feature frame to arrive, 28&nbsp;ms typical (41&nbsp;ms worst case) for the DMA transfer of the input tensor, 4.2&nbsp;ms for the DS-CNN-M inference, and a few milliseconds for thresholding and output, a single-pass total of 68&nbsp;ms measured on the board (Table 9.1), with the remaining ~23&nbsp;ms of the decomposition accounted for in Section 9.4.4. The fabric runs at 100&nbsp;MHz, the same speed as the ASIC burst clock, so the measured 4.2&nbsp;ms <em>is</em> the ASIC burst-mode inference latency. There is no scaling to apply. At the 20&nbsp;MHz nominal clock the same 420,000 cycles take 21&nbsp;ms, which exceeds REQ-P-001: DS-CNN-M meets the requirement only in burst mode, while the smaller DS-CNN-S (71,862 cycles, 3.6&nbsp;ms at 20&nbsp;MHz) meets it at nominal too. The total is far inside the 500&nbsp;ms product target either way, which leaves generous headroom. And that headroom is itself a useful result, because it tells the product team the IP can afford a more accurate model without breaking the latency target.</p>
 
@@ -7010,7 +6982,7 @@ flowchart TD
     MODE{Demo mode}
     MODE -->|Live| MIC[Microphone input]
     MODE -->|Replay| SD[SD card<br/>recorded dataset]
-    MIC --> PIPE[Identical pipeline:<br/>filterbank → NPU → threshold]
+    MIC --> PIPE["Identical pipeline:<br/>filterbank → NPU → threshold"]
     SD --> PIPE
     PIPE --> KWS[Keyword model<br/>12 classes]
     PIPE --> AED[Acoustic event model<br/>glass / alarm / cry]
@@ -7018,8 +6990,7 @@ flowchart TD
     AED --> LOG
     LOG --> CMP{Replay mode?}
     CMP -->|Yes| SIM[Compare vs simulation<br/>accuracy numbers]
-    CMP -->|No| DEMO[Customer demo]
-</div>
+    CMP -->|No| DEMO[Customer demo]</div>
 
 <h3 id="ch09-sec-4">9.4 Measuring Real Latency, Power, and Accuracy</h3>
 
@@ -7157,18 +7128,17 @@ flowchart TD
 
 <div class="mermaid">
 flowchart TD
-    FAIL[Demo failure:<br/>missed keyword / hang] --> Q{Which tool?}
+    FAIL["Demo failure:<br/>missed keyword / hang"] --> Q{Which tool?}
     Q -->|Hang, no completion| ILA[Logic analyser<br/>trigger on watchdog timeout]
     Q -->|Wrong output| DUMP[Waveform dump<br/>FSM state + buffer levels]
     Q -->|Suspect a subsystem| FORCE[Signal forcing<br/>isolate DMA / FSM / NPU]
-    ILA --> WAVE[Waveform: where did<br/>the FSM stop?]
+    ILA --> WAVE["Waveform: where did<br/>the FSM stop?"]
     DUMP --> CORR[Correlate with<br/>system event]
     FORCE --> ISOL[Subsystem proven<br/>good or bad]
     WAVE --> FIX[Fix + re-run]
     CORR --> FIX
     ISOL --> FIX
-    FIX --> REG[Replay mode<br/>regression]
-</div>
+    FIX --> REG[Replay mode<br/>regression]</div>
 
 <h4>9.6.2 A Worked Debug Story: The Missing Keyword</h4>
 
@@ -7218,8 +7188,7 @@ flowchart TD
     NEW --> REPLAY[Replay mode<br/>verify on prototype]
     REPLAY --> PASS{Accuracy<br/>improved?}
     PASS -->|Yes| DEPLOY[Deploy to demo]
-    PASS -->|No| FAIL
-</div>
+    PASS -->|No| FAIL</div>
 
 <p>With the prototype proven, the demo working, the latency and accuracy measured, the bugs found and fixed, the IP has passed its last functional gate before the backend flow. The numbers from this chapter feed directly into the next part of the book: the latency headroom justifies the synthesis targets in Chapter 11, the power ratios inform the power planning in Chapter 12, and the measured accuracy is the baseline against which silicon will be correlated in Chapter 13. Where the FPGA could not go far enough, a full SoC with a processor, memory system, and peripherals running real software around the NPU, the next chapter takes up the story with emulation.</p>
 
@@ -7258,11 +7227,10 @@ flowchart TD
     LIM -->|Short software runs| EMU
     LIM -->|No system view| EMU
     LIM -->|Block-level questions only| DONE[Prototype is enough<br/>Go to synthesis]
-    EMU --> SOC[Full SoC:<br/>CPU + memory + peripherals + NPU]
-    SOC --> SW[Real software:<br/>OS boot + drivers + apps]
-    SW --> SYS[System validation:<br/>contention, boot, power, security]
-    SYS --> SIGN[Pre-silicon sign-off]
-</div>
+    EMU --> SOC["Full SoC:<br/>CPU + memory + peripherals + NPU"]
+    SOC --> SW["Real software:<br/>OS boot + drivers + apps"]
+    SW --> SYS["System validation:<br/>contention, boot, power, security"]
+    SYS --> SIGN[Pre-silicon sign-off]</div>
 
 <h4>10.1.1 The Three Questions Emulation Answers</h4>
 
@@ -7306,8 +7274,7 @@ flowchart LR
     SWITCH --> SLEEP[Sleep and wake]
     SLEEP --> DRV[Driver stress]
     DRV --> SOAK[72-hour soak]
-    SOAK --> SIGN[System sign-off:<br/>boot, contention,<br/>drivers, soak]
-</div>
+    SOAK --> SIGN["System sign-off:<br/>boot, contention,<br/>drivers, soak"]</div>
 
 <h4>10.2.3 Speed, Cost, and the Practicalities of Access</h4>
 
@@ -7377,12 +7344,11 @@ flowchart TD
     Q1 -->|No: simple SoC,<br/>thin software| Q2{Is the first<br/>customer tolerant?}
     Q2 -->|No: schedule-critical<br/>design win| EMU
     Q2 -->|Yes: evaluation board,<br/>partner validates| SKIP[Skip emulation]
-    SKIP --> MID[Middle path:<br/>synthetic contention<br/>+ realistic bus model]
+    SKIP --> MID["Middle path:<br/>synthetic contention<br/>+ realistic bus model"]
     MID --> MEAS[Measure deadline<br/>under contention]
     MEAS --> OK{Deadline holds?}
     OK -->|Yes| SIGN[Ship with<br/>prototype evidence]
-    OK -->|No| EMU
-</div>
+    OK -->|No| EMU</div>
 
 <h4>10.3.4 The Middle Path: Synthetic Contention on the Prototype</h4>
 
@@ -7438,8 +7404,7 @@ flowchart LR
     C --> D[Static Timing Analysis]
     D --> E[Physical Silicon]
     D -->|violations| B
-    C -->|restructure| A
-</div>
+    C -->|restructure| A</div>
 
 <p>If you under-constrain the design, omitting external PCB traces, neglecting clock skew uncertainty, or applying overzealous false paths, the synthesis engine will insert small, high-resistance, low-drive standard cells (e.g., <code>X1</code> or <code>X0.5</code> inverters and gates). The resulting layout will pass a naive timing check, but the actual silicon will violate hold times at fast-cold corners or setup times at slow-hot corners, yielding dead silicon or dismal wafer yields. Conversely, if you over-constrain the design, applying unachievable input delays, excessive clock uncertainties, or failing to declare multi-cycle arithmetic pipelines, the synthesis engine panics. It maps logic into aggressive, leaky multi-threshold (Low-\(V_t\) or Extreme-Low-\(V_t\)) cells, inflates buffer trees, inserts parallel drive stages, and turns your 0.95&nbsp;mm&sup2; footprint into a 1.4&nbsp;mm&sup2; thermal radiator that blows past the 5&nbsp;mW power ceiling.</p>
 
@@ -7466,8 +7431,7 @@ flowchart LR
     A[Clock Period 10 ns] --> B[Combinational Delay]
     B --> C[Setup Margin]
     C --> D[Clock Uncertainty]
-    D --> E[Positive Slack Means Pass]
-</div>
+    D --> E[Positive Slack Means Pass]</div>
 
 <p>Clock uncertainty must be partitioned into two distinct physical components: <strong>jitter</strong> (a cycle-to-cycle variation that affects both pre-CTS synthesis and post-CTS signoff) and <strong>skew</strong> (spatial variations across the clock tree). Prior to Clock Tree Synthesis (CTS), the clock uncertainty value represents the sum of expected clock tree skew plus phase jitter. Post-CTS, the physical clock tree is fully propagated; thus, the uncertainty parameter must be dialed down in your signoff script to represent only the random jitter and margin components:</p>
 
@@ -7528,8 +7492,7 @@ flowchart TD
         C[Wake Controller] --> D[Power State]
     end
     A -->|CDC false path| C
-    C -->|CDC false path| B
-</div>
+    C -->|CDC false path| B</div>
 
 <h5>False Paths</h5>
 <p>A path is false if it is structurally impossible for a signal transition to propagate along that path and be latched by the receiving clock edge during valid functional operation. In the TinyEdge-NPU, two primary categories of paths qualify as false:</p>
@@ -7565,8 +7528,7 @@ flowchart LR
     A[Launch Edge Cycle N] --> B[Logic Delay Two Cycles]
     B --> C[Setup Capture Cycle N plus 2]
     A --> D[Hold Check Cycle N plus 1]
-    D --> C
-</div>
+    D --> C</div>
 
 <h5>Clock Groups and Exception Discipline</h5>
 <p>When multiple clocks exist on an SoC, the default behavior of STA is to evaluate timing between every possible permutation of clock edges across all domains. Because <code>clk_core</code> (100&nbsp;MHz) and <code>clk_aon</code> (1&nbsp;MHz) share no common harmonic integer relationship and their phase relationship is completely arbitrary, any timing path between them is physically meaningless. We decouple them globally using <code>set_clock_groups</code>:</p>
@@ -7799,17 +7761,16 @@ set_ideal_network [get_ports {rst_n_core rst_n_axi scan_enable}]
 
 <div class="mermaid">
 flowchart TD
-    A[RTL & SDC Input] --> B[check_timing Analysis]
+    A["RTL & SDC Input"] --> B[check_timing Analysis]
     B --> C{Unconstrained<br/>Endpoints / Clocks?}
-    C -- Yes --> D[Flag Critical Errors & Fix SDC]
+    C -- Yes --> D["Flag Critical Errors & Fix SDC"]
     D --> B
     C -- No --> E[report_exceptions Audit]
     E --> F{Overridden or<br/>Invalid Exceptions?}
     F -- Yes --> G[Refine False / Multicycle Paths]
     G --> E
     F -- No --> H[report_analysis_coverage]
-    H --> I[SDC Sign-Off Complete for P&R]
-</div>
+    H --> I["SDC Sign-Off Complete for P&R"]</div>
 
 <p>The following Tcl audit script executes inside the STA tool (such as Synopsys PrimeTime or Cadence Tempus) to validate constraint completeness for the TinyEdge-NPU design database:</p>
 
@@ -7872,8 +7833,7 @@ flowchart TD
     subgraph BU[Bottom-Up Hierarchical]
         A2[PE Tile RTL] --> B2[Compile Tile Once]
         B2 --> C2[Assemble 8 by 8 Array]
-    end
-</div>
+    end</div>
 
 <p>
 In a <strong>top-down flow</strong>, the entire design hierarchy, from the top-level AXI-Lite register bank down through the activation routing and the individual Processing Elements (PEs), is read into the synthesis tool and optimized concurrently:
@@ -8022,8 +7982,7 @@ flowchart TD
     subgraph SHR[Over-Shared Architecture]
         C1[MAC Array] --> D1[Shared Mux]
         D1 --> E1[Single Requant Unit]
-    end
-</div>
+    end</div>
 
 <p>
 The multiplexer logic and cross-coupled control often consume more silicon area than the adder gates saved, while introducing significant routing congestion. The optimal strategy for the TinyEdge-NPU is <em>zero resource sharing within the inner loop of the PE</em>. Dedicate an unshared, highly compact multiplier-accumulator per PE, and place requantization and scaling outside the array as a shared pipelined resource at the activation buffer boundaries.
@@ -8072,8 +8031,7 @@ flowchart TD
         C --> D[SRAM Macro]
     end
     E[BIST Controller] --> F[BIST Mux]
-    F --> D
-</div>
+    F --> D</div>
 
 <pre><code>// Instantiation of the 16KB Activation SRAM Wrapper
 module sram_act_16k_wrapper (
@@ -8137,8 +8095,7 @@ flowchart LR
     A[Weight SRAM Read] --> B[MAC Multiply]
     B --> C[Adder Tree]
     C --> D[Accumulator Register]
-    D -->|feedback path| B
-</div>
+    D -->|feedback path| B</div>
 
 <p>
 The tightest path is often the <strong>accumulator feedback loop</strong>:
@@ -8278,13 +8235,12 @@ To understand how static timing analysis (STA) drives design decisions, we walk 
 
 <div class="mermaid">
 graph TD
-    A[Initial Baseline STA: WNS = -0.42 ns] --> B[Iteration 1: Microarchitecture]
-    B -->|Pipeline Adder Tree & Segment Broadcast| C[Intermediate STA: WNS = -0.27 ns]
-    C --> D[Iteration 2: SRAM Wrapper Interface]
-    D -->|Add Wrapper Retiming Stage & Pre-Decode| E[Post-CTS STA: Setup WNS = +0.18 ns, Hold WNS = -0.18 ns]
-    E --> F[Iteration 3: Physical ECO & CTS Tuning]
-    F -->|Useful Skew & Delay Buffer Insertion| G[Sign-off Timing Closed: Setup +0.22 ns, Hold +0.06 ns]
-</div>
+    A["Initial Baseline STA: WNS = -0.42 ns"] --> B["Iteration 1: Microarchitecture"]
+    B -->|Pipeline Adder Tree & Segment Broadcast| C["Intermediate STA: WNS = -0.27 ns"]
+    C --> D["Iteration 2: SRAM Wrapper Interface"]
+    D -->|Add Wrapper Retiming Stage & Pre-Decode| E["Post-CTS STA: Setup WNS = +0.18 ns, Hold WNS = -0.18 ns"]
+    E --> F["Iteration 3: Physical ECO & CTS Tuning"]
+    F -->|Useful Skew & Delay Buffer Insertion| G["Sign-off Timing Closed: Setup +0.22 ns, Hold +0.06 ns"]</div>
 
 <h4>Iteration 1: Baseline Architecture—Adder Tree Depth and Broadcast Congestion</h4>
 
@@ -8569,8 +8525,7 @@ flowchart TD
     B --> C[SAIF and VCD Activity]
     C --> D[Power Analysis Tool]
     D --> E[Power by Block Report]
-    E --> F[Budget Check vs 5 mW]
-</div>
+    E --> F[Budget Check vs 5 mW]</div>
 
 <p>To accurately capture switching activity for the TinyEdge-NPU's target keyword-spotting (KWS) task, such as running a 1-second 12-class Google Speech Commands convolutional neural network with 16&nbsp;kHz audio and 40-band Mel-Frequency Cepstral Coefficients (MFCC), we rely on dynamic activity tracking files:</p>
 
@@ -8616,8 +8571,7 @@ flowchart TD
     A --> C[Sequential Flops]
     B --> D[Dynamic Power Dominant]
     C --> E[Leakage Contribution]
-    F[SRAM Macros] --> G[Leakage Dominant]
-</div>
+    F[SRAM Macros] --> G[Leakage Dominant]</div>
 
 <h4>11.7.3 TinyEdge-NPU Worked Power Budget Table</h4>
 
@@ -8752,8 +8706,7 @@ flowchart TD
     A --> D
     A --> E
     B --> F
-    C --> E
-</div>
+    C --> E</div>
 
 <h5>Operational Modes:</h5>
 <ol>
@@ -8797,8 +8750,7 @@ flowchart TD
     C --> E[Capture Path]
     D --> F[Reconvergence Point]
     E --> F
-    F --> G[CPPR Credit Removes Shared Delay]
-</div>
+    F --> G[CPPR Credit Removes Shared Delay]</div>
 
 <p>Without CPPR, the STA engine pessimistically applies an early derate factor to the launch portion of the common spine and a late derate factor to the capture portion for hold checks. CPPR identifies the exact clock divergence pin, calculates this artificial timing error, and adds it back as a positive credit to the Slack equation:</p>
 
@@ -9043,8 +8995,7 @@ flowchart LR
     classDef core fill:#d5e8d4,stroke:#82b366,stroke-width:2px;
     class AON_DOMAIN aon;
     class ISOLATION_BARRIER iso;
-    class CORE_DOMAIN core;
-</div>
+    class CORE_DOMAIN core;</div>
 
 <h4>Unmodeled Clock-Domain Crossings Between Core and Always-On Domains</h4>
 <p>
@@ -9236,8 +9187,7 @@ graph TD
     ASRAM -- "Activation Stream (M4/M5)" --> MAC
     MAC --> ACC
     ACC -- "Requantized INT8 Stream" --> ASRAM
-    ACC -. "Interrupt / Writeback" .-> DMA
-</div>
+    ACC -. "Interrupt / Writeback" .-> DMA</div>
 
 <p>In this architecture, the physical floorplan uses a "C-shaped" standard-cell channel wrapped around three hard macro blocks:</p>
 
@@ -9441,24 +9391,24 @@ We isolate the primary power consumer, the \(8\times8\) MAC array, input/output 
 
 <div class="mermaid">
 flowchart TD
-    subgraph AON_Domain [Always-On Power Domain: VDD_AON / Continuous VSS]
+    subgraph AON_Domain ["Always-On Power Domain: VDD_AON / Continuous VSS"]
         PMU[Power Management Unit]
-        AON_CTRL[Wakeup Logic & AXI-Lite Regs]
+        AON_CTRL["Wakeup Logic & AXI-Lite Regs"]
         ISO_CTRL[Isolation Controller]
         RET_CTRL[Retention Controller]
     end
 
-    subgraph Power_Switches [Distributed PMOS Headers]
+    subgraph Power_Switches ["Distributed PMOS Headers"]
         SW_CHAIN[Daisy-Chained Sleep Transistors]
     end
 
-    subgraph Gated_Domain [Switchable Domain: VDD_CORE]
+    subgraph Gated_Domain ["Switchable Domain: VDD_CORE"]
         MAC[8x8 INT8 MAC Array]
-        DATAPATH[Quantization & Normalization]
+        DATAPATH["Quantization & Normalization"]
         CFG_REGS[Config Registers with Retention Latches]
     end
 
-    subgraph Memory_System [Memory Domain: Dual-Rail Array]
+    subgraph Memory_System ["Memory Domain: Dual-Rail Array"]
         SRAM_W[32 KB Weight SRAM]
         SRAM_A[16 KB Activation SRAM]
     end
@@ -9473,8 +9423,7 @@ flowchart TD
     ISO_CTRL -->|Clamp Signals to 0| MAC
     MAC -->|Clamped Outputs| AON_CTRL
     PMU -->|Periphery Cutoff / Bias| SRAM_W
-    PMU -->|Periphery Cutoff / Bias| SRAM_A
-</div>
+    PMU -->|Periphery Cutoff / Bias| SRAM_A</div>
 
 <p>
 The PMOS header array is embedded in dedicated standard-cell rows across the core fabric. Key design parameters include:
@@ -9608,7 +9557,7 @@ The physical layout of the TinyEdge-NPU, with its dense MAC matrix flanked by me
 
 <div class="mermaid">
 flowchart LR
-    GDS[Post-P&R GDSII / OASIS] --> FILL[Dummy Metal & Poly Fill]
+    GDS["Post-P&R GDSII / OASIS"] --> FILL["Dummy Metal & Poly Fill"]
     FILL --> DRC[Calibre / Pegasus DRC]
     FILL --> LVS[Calibre / Pegasus LVS]
     GDS --> ERC[Electrical Rule Checks]
@@ -9625,8 +9574,7 @@ flowchart LR
     DRC -.->|Violations| ECO[Automated ECO Loop]
     LVS -.->|Violations| ECO
     DYN_IR -.->|Excessive Droop| ECO
-    ECO -->|Route Patching / Diode Insertion| GDS
-</div>
+    ECO -->|Route Patching / Diode Insertion| GDS</div>
 
 <h4>Electrical Rule Checks (ERC)</h4>
 
@@ -9675,20 +9623,19 @@ Physical sign-off concludes with dynamic, vector-driven EM/IR analysis:
 
 <div class="mermaid">
 flowchart TD
-    A[Routed Post-CTS GDSII / OASIS] --> B[DRC & Antenna Check]
-    B -->|Violations Found| C[ECO Routing & Diode Insertion]
+    A[Routed Post-CTS GDSII / OASIS] --> B["DRC & Antenna Check"]
+    B -->|Violations Found| C["ECO Routing & Diode Insertion"]
     C --> B
-    B -->|DRC / Antenna Clean| D[LVS & ERC Verification]
+    B -->|DRC / Antenna Clean| D["LVS & ERC Verification"]
     D -->|Mismatch / ERC Error| E[Schematic / Well-Tap ECO]
     E --> D
     D -->|LVS / ERC Clean| F[Dummy Metal Fill Insertion]
-    F --> G[Fill DRC & Density Check]
+    F --> G["Fill DRC & Density Check"]
     G --> H[Full-Chip Parasitic Extraction RC]
-    H --> I[Static & Dynamic IR / EM Sign-Off]
+    H --> I["Static & Dynamic IR / EM Sign-Off"]
     I -->|IR / EM Breach| J[Power Grid / Decap Refinement]
     J --> H
-    I -->|All Sign-Off Targets Met| K[Final Sign-Off Archive Freeze]
-</div>
+    I -->|All Sign-Off Targets Met| K[Final Sign-Off Archive Freeze]</div>
 
 <h4>12.6.1 Design Rule Checking (DRC) and Iterative Resolutions</h4>
 
@@ -9961,8 +9908,7 @@ flowchart TB
     SCAN --> NPU
     RO_Array --> MUX
     NPU --> MUX
-    MUX --> IO_PINS
-</div>
+    MUX --> IO_PINS</div>
 
 <h4>1. The Core Under Test (DUT)</h4>
 <p>The primary instance of the TinyEdge-NPU core must represent the production physical synthesis, place, and route baseline. It includes the 8&times;8 INT8 MAC datapath, microcode sequencer, activation function pipelines (ReLU/Sigmoid approximations), and AXI-Lite register bank. It is strongly advised to instantiate <em>two</em> variations of the core if MPW area permits (e.g., inside a 2&times;2 mm footprint):</p>
@@ -10288,17 +10234,16 @@ An IP vendor does not sell a standalone packaged component; you sell an integrat
 <div class="mermaid">
 flowchart LR
     A[Tape-Out Sign-Off] --> B[Mask Generation / Reticle Fab]
-    B --> C[Wafer Processing: 28nm Litho]
-    C --> D[Wafer Sort / Probe: CP]
-    D --> E[Dicing & Packaging: QFN-48]
-    E --> F[Package Test: FT]
+    B --> C["Wafer Processing: 28nm Litho"]
+    C --> D["Wafer Sort / Probe: CP"]
+    D --> E["Dicing & Packaging: QFN-48"]
+    E --> F["Package Test: FT"]
     F --> G[Lab Bench Silicon Validation]
-    G --> H[Customer Evaluation Kit & IP Sign-off]
+    G --> H["Customer Evaluation Kit & IP Sign-off"]
     style A fill:#f9f9f9,stroke:#333,stroke-width:1px;
     style D fill:#d4f1f4,stroke:#05668d,stroke-width:2px;
     style F fill:#d4f1f4,stroke:#05668d,stroke-width:2px;
-    style G fill:#ffd166,stroke:#f77f00,stroke-width:2px;
-</div>
+    style G fill:#ffd166,stroke:#f77f00,stroke-width:2px;</div>
 
 ---
 
@@ -10326,24 +10271,23 @@ Wafer sort tests the fabricated dies while they are still integral to the 300&nb
 
 <div class="mermaid">
 flowchart TD
-    Start([Wafer Docked on Prober]) --> OS[1. Continuity & Open/Short Test]
-    OS -- Fail --> Bin8[Bin 8: Mechanical / Probe Contact Fail]
-    OS -- Pass --> IDDQ[2. Power Shorts & IDDQ Leakage]
-    IDDQ -- Fail --> Bin7[Bin 7: Gross Leakage / Oxide Breakdown]
-    IDDQ -- Pass --> MBIST[3. SRAM MBIST Engine: March C+]
-    MBIST -- Fail --> Bin4[Bin 4: SRAM Array Defect]
-    MBIST -- Pass --> ATPG[4. Scan ATPG: Stuck-At & At-Speed]
-    ATPG -- Fail --> Bin3[Bin 3: Logic Timing / Path Defect]
-    ATPG -- Pass --> FUSE[5. eFuse Programming & Die ID Burn]
-    FUSE --> Bin1[Bin 1: Known Good Die - KGD]
+    Start([Wafer Docked on Prober]) --> OS["1. Continuity & Open/Short Test"]
+    OS -- Fail --> Bin8["Bin 8: Mechanical / Probe Contact Fail"]
+    OS -- Pass --> IDDQ["2. Power Shorts & IDDQ Leakage"]
+    IDDQ -- Fail --> Bin7["Bin 7: Gross Leakage / Oxide Breakdown"]
+    IDDQ -- Pass --> MBIST["3. SRAM MBIST Engine: March C+"]
+    MBIST -- Fail --> Bin4["Bin 4: SRAM Array Defect"]
+    MBIST -- Pass --> ATPG["4. Scan ATPG: Stuck-At & At-Speed"]
+    ATPG -- Fail --> Bin3["Bin 3: Logic Timing / Path Defect"]
+    ATPG -- Pass --> FUSE["5. eFuse Programming & Die ID Burn"]
+    FUSE --> Bin1["Bin 1: Known Good Die - KGD"]
     
     style Start fill:#f9f9f9,stroke:#333;
     style Bin1 fill:#b7e4c7,stroke:#2d6a4f,stroke-width:2px;
     style Bin8 fill:#ffccd5,stroke:#c9184a;
     style Bin7 fill:#ffccd5,stroke:#c9184a;
     style Bin4 fill:#ffccd5,stroke:#c9184a;
-    style Bin3 fill:#ffccd5,stroke:#c9184a;
-</div>
+    style Bin3 fill:#ffccd5,stroke:#c9184a;</div>
 
 <h4>Test Program Structure and Binning</h4>
 <p>
@@ -10404,13 +10348,13 @@ flowchart LR
     end
 
     subgraph Power Infrastructure
-        SMU1[SMU Ch1: VDD_CORE 0.9V<br/>Keithley 2450 / 50mA Clamp]
-        SMU2[SMU Ch2: VDD_IO 1.8V<br/>Keithley 2450 / 100mA Clamp]
+        SMU1["SMU Ch1: VDD_CORE 0.9V<br/>Keithley 2450 / 50mA Clamp"]
+        SMU2["SMU Ch2: VDD_IO 1.8V<br/>Keithley 2450 / 100mA Clamp"]
     end
 
     subgraph Instrument Rack
         MSO[Keysight MSOX6004A<br/>4-Ch 1GHz Scope / Active Probes]
-        LA[Logic Analyzer: 16-Ch<br/>Saleae Pro / AXI-Lite Sniffer]
+        LA["Logic Analyzer: 16-Ch<br/>Saleae Pro / AXI-Lite Sniffer"]
     end
 
     subgraph Validation Board
@@ -10426,8 +10370,7 @@ flowchart LR
     SMU1 -->|Kelvin Sense| DUT
     SMU2 -->|Kelvin Sense| DUT
     DUT --> MSO
-    DUT --> LA
-</div>
+    DUT --> LA</div>
 
 <p>The bench setup requires specific components:</p>
 
@@ -10588,14 +10531,13 @@ Bring-up should follow an invariant rule: <em>never execute complex functionalit
 
 <div class="mermaid">
 flowchart TD
-    A[1. Passive Impedance & Pin Continuity Check] --> B[2. Power Rail Ramp & Quiescent Current Iddq]
-    B --> C[3. Clock Generation & Power-On-Reset Release]
-    C --> D[4. Host Bus AXI-Lite Register Access & Scratchpad RW]
+    A["1. Passive Impedance & Pin Continuity Check"] --> B["2. Power Rail Ramp & Quiescent Current Iddq"]
+    B --> C["3. Clock Generation & Power-On-Reset Release"]
+    C --> D["4. Host Bus AXI-Lite Register Access & Scratchpad RW"]
     D --> E[5. SRAM Built-In Self-Test MBIST Execution]
-    E --> F[6. DMA & SRAM Burst Transfer Integrity]
-    F --> G[7. Compute Smoke Test: 8x8 Identity GEMM]
-    G --> H[8. Thermal, VDD Scaling & Fmax Characterization]
-</div>
+    E --> F["6. DMA & SRAM Burst Transfer Integrity"]
+    F --> G["7. Compute Smoke Test: 8x8 Identity GEMM"]
+    G --> H["8. Thermal, VDD Scaling & Fmax Characterization"]</div>
 
 <blockquote>
 <strong>Silicon Rule of Engagement:</strong> Set your bench power supplies to fold-back current-limiting modes before applying power to a new die for the first time. For the TinyEdge-NPU, limit the 0.9 V core rail to 15 mA (normal active current is &sim;4.5 mA; quiescent leakage is &sim;80 &mu;A). If the board attempts to draw more than 15 mA during initial power-on, the supply will clamp immediately, preventing catastrophic thermal runaway caused by package-level solder bridges or latch-up events.
@@ -10701,19 +10643,18 @@ The dedicated testchip is the physical artifact that transitions an IP core from
 
 <div class="mermaid">
 flowchart TD
-    A[RTL & Signoff GDSII] --> B[Foundry 28nm Tapeout]
-    B --> C[Wafer Fab & Dicing]
+    A["RTL & Signoff GDSII"] --> B[Foundry 28nm Tapeout]
+    B --> C["Wafer Fab & Dicing"]
     C --> D[Packaged Testchips QFN-48]
-    D --> E[Bench Bring-Up & Power Rail Sanity]
-    E --> F[Functional Smoke Test & JTAG Scan]
+    D --> E["Bench Bring-Up & Power Rail Sanity"]
+    E --> F["Functional Smoke Test & JTAG Scan"]
     F --> G[Bit-Accurate KWS Workload Validation]
-    G --> H[Performance & Shmoo Characterization]
+    G --> H["Performance & Shmoo Characterization"]
     G --> I[Power Rail Current Profiling]
-    G --> J[PVT Corner & SRAM Margin Characterization]
-    H --> K[Silicon Validation Report & Customer Datasheet]
+    G --> J["PVT Corner & SRAM Margin Characterization"]
+    H --> K["Silicon Validation Report & Customer Datasheet"]
     I --> K
-    J --> K
-</div>
+    J --> K</div>
 
 <h4>13.4.1 The Role of the Testchip in IP Commercial Maturity</h4>
 
@@ -10953,9 +10894,9 @@ Measuring microwatt-level sleep currents alongside rapid, multi-milliamp active 
 graph LR
     subgraph Instrumentation Rack
         SMU[Keysight N6705C DC Power Analyzer]
-        SMU_CH1[Channel 1: VDD_CORE 0.9V]
-        SMU_CH2[Channel 2: VDD_SRAM 0.9V]
-        SMU_CH3[Channel 3: VDD_IO 1.8V]
+        SMU_CH1["Channel 1: VDD_CORE 0.9V"]
+        SMU_CH2["Channel 2: VDD_SRAM 0.9V"]
+        SMU_CH3["Channel 3: VDD_IO 1.8V"]
         SMU --> SMU_CH1
         SMU --> SMU_CH2
         SMU --> SMU_CH3
@@ -10978,8 +10919,7 @@ graph LR
     end
 
     HostPC[Automation Workstation] --> SMU
-    HostPC --> Thermostream
-</div>
+    HostPC --> Thermostream</div>
 
 <ul>
     <li><strong>Power Rail Isolation:</strong> The testchip implements three physically independent supply rings: <code>VDD_CORE</code> (standard cells, 8&times;8 MAC datapath, control state machines), <code>VDD_SRAM</code> (the 32 KB and 16 KB memory macro arrays and periphery), and <code>VDD_IO</code> (pad ring, level-shifters, ESD structures).</li>
@@ -11099,14 +11039,14 @@ flowchart TD
     B --> C{Temp Settled? &plusmn;0.5 &deg;C}
     C -- No --> C
     C -- Yes --> D[Set VDD_CORE / VDD_SRAM via SMU]
-    D --> E[Execute SRAM BIST & Margin Sweeps]
+    D --> E["Execute SRAM BIST & Margin Sweeps"]
     E --> F[Run Binary Search for Fmax on INT8 Kernel]
-    F --> G[Log Static Leakage & Dynamic Current]
+    F --> G["Log Static Leakage & Dynamic Current"]
     G --> H{Exhausted Frequencies & Voltages?}
     H -- No --> D
     H -- Yes --> I{Exhausted Temperatures?}
     I -- No --> B
-    I -- Yes --> J[Generate Shmoo & Compile PVT Report]
+    I -- Yes --> J["Generate Shmoo & Compile PVT Report"]
   </div>
 
   <p>
@@ -11242,15 +11182,14 @@ flowchart TD
 
 <div class="mermaid">
 flowchart LR
-    A[RTL & Signoff STA] -->|Vector Capture VCD/FSDB| D[Correlation Engine]
+    A["RTL & Signoff STA"] -->|Vector Capture VCD/FSDB| D[Correlation Engine]
     B[FPGA Prototype 50 MHz] -->|Cycle-Accurate Traces| D
     C[Silicon ATE / Bench 0.9V, 28nm] -->|Shmoo & Current Datalog| D
     D --> E{Delta Analysis}
     E -->|Timing Delta > 5%| F[Recalibrate Parasitic Extr. / Liberty]
-    E -->|Power Delta > 15%| G[Tune Activity Factors & Glitch Models]
+    E -->|Power Delta > 15%| G["Tune Activity Factors & Glitch Models"]
     E -->|Cycle Delta > 0| H[Debug Microarchitecture / Bus Jitter]
-    E -->|Pass Tolerances| I[Sign-Off Silicon Correlation]
-</div>
+    E -->|Pass Tolerances| I[Sign-Off Silicon Correlation]</div>
 
 <h4>Building the Three-Domain Correlation Matrix</h4>
 
@@ -11521,23 +11460,23 @@ Until those numbers exist, any yield claim for the TinyEdge-NPU testchip is a pr
 
 <div class="mermaid">
 flowchart TD
-    subgraph DataCollection [Automated Test Floor]
+    subgraph DataCollection ["Automated Test Floor"]
         A[HTOL 1000h Stress]
         B[Automated Shmoo Characterization]
-        C[ESD & Latch-Up JEDEC Tests]
+        C["ESD & Latch-Up JEDEC Tests"]
     end
 
-    subgraph Processing [Statistical Analysis]
+    subgraph Processing ["Statistical Analysis"]
         D[Weibull Reliability Models]
         E[PVT Margin Extraction]
-        F[Yield & Failure Log Triage]
+        F["Yield & Failure Log Triage"]
     end
 
-    subgraph CustomerDeliverables [Customer Silicon-Proven Pack]
+    subgraph CustomerDeliverables ["Customer Silicon-Proven Pack"]
         G[Silicon Characterization Report]
-        H[Errata & Workaround Guide]
-        I[Reliability & Qualification Summary]
-        J[Updated Liberty .lib & Synopsys Constraints]
+        H["Errata & Workaround Guide"]
+        I["Reliability & Qualification Summary"]
+        J["Updated Liberty .lib & Synopsys Constraints"]
     end
 
     A --> D
@@ -11547,8 +11486,7 @@ flowchart TD
     D --> I
     E --> G
     E --> J
-    F --> H
-</div>
+    F --> H</div>
 
 <h4>The Three Mandatory Customer Deliverables</h4>
 
@@ -11637,14 +11575,13 @@ Packaging the deliverable tree in this deterministic manner ensures that downstr
 
 <div class="mermaid">
 flowchart TD
-    A[Wafer Arrival & Dicing] --> B[Bench Carrier & Socket Assembly]
-    B --> C[Power-On Smoke Test & ID Check]
-    C --> D[Scan Chain & MBIST Execution]
-    D --> E[Bit-True Layer Verification: Conv2D / FC]
-    E --> F[PVT Shmoo: 0.81V-0.99V, -40C to 125C]
-    F --> G[Power Profiling: Active MAC & Leakage]
-    G --> H[Customer Delivery & Silicon Sign-Off]
-</div>
+    A["Wafer Arrival & Dicing"] --> B["Bench Carrier & Socket Assembly"]
+    B --> C["Power-On Smoke Test & ID Check"]
+    C --> D["Scan Chain & MBIST Execution"]
+    D --> E["Bit-True Layer Verification: Conv2D / FC"]
+    E --> F["PVT Shmoo: 0.81V-0.99V, -40C to 125C"]
+    F --> G["Power Profiling: Active MAC & Leakage"]
+    G --> H["Customer Delivery & Silicon Sign-Off"]</div>
 
 <h3 id="ch13-sec-8">13.8 Best Practices and Recommendations</h3>
 
@@ -11922,8 +11859,7 @@ flowchart TD
     F --> I[Shmoo Plotting]
     G --> J[Root Cause and Fix]
     H --> J
-    I --> J
-</div>
+    I --> J</div>
 
 <h5>1. Random Defect Yield Loss</h5>
 <p>Random defects are physical anomalies caused by airborne particulates, chemical impurities in wet benches, sputtering flaking in PVD chambers, or micro-voiding in electroplated copper. They manifest as shorts (bridging adjacent metal lines) or opens (broken signal paths or severed via connections). They are fundamentally spatial and stochastic. If a 45nm particle lands between two parallel routing tracks on Metal 2 running the INT8 weight streaming bus, that bus line is grounded or bridged to an adjacent net, permanently disabling that compute lane.</p>
@@ -12007,8 +11943,7 @@ flowchart LR
     A --> E
     C --> H
     D --> F
-    B --> E
-</div>
+    B --> E</div>
 
 <h5>IP Vendor Responsibilities</h5>
 <ul>
@@ -12135,8 +12070,7 @@ flowchart TD
     C --> E
     D --> E
     E --> F[ATE Test Program]
-    F --> G[Wafer Sort and Final Test]
-</div>
+    F --> G[Wafer Sort and Final Test]</div>
 
 <h4>14.2.1 IP-Level Test vs. Chip-Level Production Test</h4>
 
@@ -12239,8 +12173,7 @@ flowchart LR
     B --> C[Stuck-At Scan]
     C --> D[At-Speed Transition Scan]
     D --> E[IDDQ and Leakage]
-    E --> F[Pass / Fail Binning]
-</div>
+    E --> F[Pass / Fail Binning]</div>
 
 <h5>Scan-Based Structural Testing</h5>
 <p>Scan testing replaces standard edge-triggered flip-flops with scan-enabled flip-flops featuring an integrated input multiplexer controlled by a global <code>scan_enable</code> signal. Structural test execution operates in two alternating phases:</p>
@@ -12288,8 +12221,7 @@ flowchart TD
     A --> D
     C --> D
     B --> E[SoC Test Access Port]
-    A --> E
-</div>
+    A --> E</div>
 
 <p>The wrapper supports three mandatory operating modes:</p>
 <ul>
@@ -12488,8 +12420,7 @@ flowchart TD
     E --> F[EFA Emission Microscopy]
     F --> G[PFA Deprocessing]
     G --> H[Root Cause Report]
-    H --> I[Corrective Action]
-</div>
+    H --> I[Corrective Action]</div>
 
 <p>The structured root-cause triage protocol follows four sequential phases:</p>
 
@@ -12532,12 +12463,11 @@ flowchart TD
     A --> G[signoff/]
     A --> M[dft/]
     B --> H[Synthesizable RTL]
-    C --> I[SDC, UPF & Synthesis Scripts]
+    C --> I["SDC, UPF & Synthesis Scripts"]
     E --> J[Drivers and Firmware]
     F --> K[UVM Testbench and Coverage]
     G --> L[DRC / LVS / Timing Reports]
-    M --> N[Scan, ATPG & MBIST Collars]
-</div>
+    M --> N["Scan, ATPG & MBIST Collars"]</div>
 
 <h4>What a Complete Commercial IP Package Contains</h4>
 
@@ -12677,8 +12607,7 @@ flowchart LR
     B --> C[DFT and Test Sign-off]
     C --> D[Silicon Validation]
     D --> E[Documentation Complete]
-    E --> F[Commercial IP Release]
-</div>
+    E --> F[Commercial IP Release]</div>
 
 <h5>1. The Five Production Readiness Gating Criteria</h5>
 
@@ -12770,8 +12699,7 @@ flowchart TD
     C -->|Yes| E[Customer Advisory Notice]
     E --> F[Workaround Published]
     F --> G[RTL Maintenance Release]
-    G --> H[Errata Closed]
-</div>
+    G --> H[Errata Closed]</div>
 
 <h4>Summary of Production Release Deliverables</h4>
 
@@ -12821,15 +12749,14 @@ flowchart TD
 
 <div class="mermaid">
 flowchart TD
-    A[Initial Discovery: Whitepaper/PPA Spec] --> B{Architect Review}
+    A["Initial Discovery: Whitepaper/PPA Spec"] --> B{Architect Review}
     B -- PPA/Interface Mismatch --> C[Immediate Disqualification]
     B -- Valid Fit --> D[1-Month Fast Model / Benchmark Eval]
     D -- Tooling/Accuracy Failure --> C
     D -- Passes Benchmark --> E[3-Month RTL / Toolchain Evaluation]
     E -- Undocumented Waivers / Integration Pain --> C
     E -- Proven Fit --> F[Final Vendor Selection]
-    F --> G[Production License Signed]
-</div>
+    F --> G[Production License Signed]</div>
 
 <p>Technical marketing serves as the primary mechanism to dismantle this friction before the sales team ever engages in direct commercial negotiations. Marketing accomplishes this by:</p>
 
@@ -13135,13 +13062,12 @@ sequenceDiagram
 
 <div class="mermaid">
 flowchart TD
-    A[Public Marketing Assets] --> B[Product Brief: 2 pages, public metrics]
-    A --> C[White Paper: Quantified architectural benchmarks]
-    D[Under Mutual NDA] --> E[Full Datasheet: Complete register maps, IO timings]
-    D --> F[Integration Guide: Clocking, resets, UPF, power gating]
-    D --> G[Live Hardware Demo: FPGA bitstream + live mic + scope]
-    D --> H[Evaluation Package: Obfuscated RTL / Cycle-Accurate SystemC]
-</div>
+    A[Public Marketing Assets] --> B["Product Brief: 2 pages, public metrics"]
+    A --> C["White Paper: Quantified architectural benchmarks"]
+    D[Under Mutual NDA] --> E["Full Datasheet: Complete register maps, IO timings"]
+    D --> F["Integration Guide: Clocking, resets, UPF, power gating"]
+    D --> G["Live Hardware Demo: FPGA bitstream + live mic + scope"]
+    D --> H["Evaluation Package: Obfuscated RTL / Cycle-Accurate SystemC"]</div>
 
 <h4>Asset Classification and Requirements</h4>
 <ul>
@@ -13192,13 +13118,12 @@ flowchart TD
 
 <div class="mermaid">
 flowchart LR
-    subgraph Hardware [FPGA Evaluation Board]
+    subgraph Hardware ["FPGA Evaluation Board"]
         MIC[I2S MEMS Microphone] -->|I2S Stream| RTL[TinyEdge-NPU RTL Core]
         RTL -->|Inference Status| AXIL[AXI-Lite Controller]
         SHUNTR[Precision Shunt Resistor] -.-|Differential Tap| DMM[Power Profiler / Scope]
     end
-    AXIL -->|UART / USB Bridge| HOST[Host GUI: Real-time Spectrogram & Logit Probabilities]
-</div>
+    AXIL -->|UART / USB Bridge| HOST["Host GUI: Real-time Spectrogram & Logit Probabilities"]</div>
 
 <p>The demonstration platform implements the full datapath: an off-the-shelf I2S digital MEMS microphone samples 16&nbsp;kHz mono audio; the TinyEdge-NPU extracts mel-frequency cepstral coefficients (MFCCs) and executes a 12-class depthwise separable convolutional neural network (DS-CNN). A dedicated current-shunt monitor (e.g., TI INA226 or Keysight N6705C DC Power Analyzer) is physically connected across the FPGA core supply rail, isolating the accelerator’s dynamic current.</p>
 
@@ -13258,15 +13183,14 @@ flowchart LR
 
 <div class="mermaid">
 flowchart TD
-    M1[1. Lead Generation & Tech Screening] --> M2[2. Mutual NDA Execution]
-    M2 --> M3[3. Architecture Deep-Dive & Eval Kit Delivery]
+    M1["1. Lead Generation & Tech Screening"] --> M2[2. Mutual NDA Execution]
+    M2 --> M3["3. Architecture Deep-Dive & Eval Kit Delivery"]
     M3 --> M4{4. Customer Technical Feasibility Gate}
     M4 -- Pass --> M5[5. Commercial Term Sheet Negotiation]
-    M4 -- Fail --> M4F[Post-Mortem: Gap Analysis & Roadmap Entry]
-    M5 --> M6[6. Legal Review: IP SLA & License Agreement]
-    M6 --> M7[7. Delivery: Encrypted RTL, Scripts, Testbenches]
-    M7 --> M8[8. Post-Sales: Integration & Tapeout Support]
-</div>
+    M4 -- Fail --> M4F["Post-Mortem: Gap Analysis & Roadmap Entry"]
+    M5 --> M6["6. Legal Review: IP SLA & License Agreement"]
+    M6 --> M7["7. Delivery: Encrypted RTL, Scripts, Testbenches"]
+    M7 --> M8["8. Post-Sales: Integration & Tapeout Support"]</div>
 
 <h4>Common Objections and Strategic Responses</h4>
 
@@ -13331,13 +13255,12 @@ flowchart TD
 <div class="mermaid">
 flowchart TD
     A[Customer Profile Assessment] --> B{Projected Annual Volume}
-    B -->|< 500k units/yr| C[Basic: Flat License, Zero Royalty]
-    B -->|500k - 5M units/yr| D[Standard: Balanced Upfront + 1% Royalty]
-    B -->|> 5M units/yr| E[Premium: Higher Upfront + 0.5% Royalty / Buyout]
+    B -->|< 500k units/yr| C["Basic: Flat License, Zero Royalty"]
+    B -->|500k - 5M units/yr| D["Standard: Balanced Upfront + 1% Royalty"]
+    B -->|> 5M units/yr| E["Premium: Higher Upfront + 0.5% Royalty / Buyout"]
     C --> F[Low Operational Overhead, No Audit Requirement]
     D --> G[Maximizes Lifetime Value via Production Scaling]
-    E --> H[De-risks Customer High-Volume Run Rate]
-</div>
+    E --> H[De-risks Customer High-Volume Run Rate]</div>
 
 <h4>Packaging Framework: TinyEdge-NPU</h4>
 <p>To align with varying customer risk profiles, engineering capabilities, and expected unit shipments, TinyEdge-NPU is partitioned into four commercial tiers. Table 15.1 defines the deliverables, support levels, and economic structures across these offerings.</p>
@@ -13802,11 +13725,10 @@ flowchart TD
     
     H --> K[Run Full Regression Suite]
     I --> K
-    K --> L[Issue Customer Release & Sign-off]
+    K --> L["Issue Customer Release & Sign-off"]
     
-    D --> M[Provide Spec Reference & Guidance]
-    E --> N[Forward to Product Roadmap/NRE Quote]
-</div>
+    D --> M["Provide Spec Reference & Guidance"]
+    E --> N[Forward to Product Roadmap/NRE Quote]</div>
 
 <p>The escalation sequence illustrated above protects core engineering resources while providing transparent boundaries for the customer. When a customer logs a ticket claiming a Severity 1 failure, the primary goal is not immediate RTL modification. Hasty RTL patches frequently introduce subtle secondary regressions. Instead, the applications engineering team focuses first on establishing deterministic reproducibility within the vendor’s standalone verification environment. If the issue cannot be reproduced in the standard testbench using the customer's parameter set, the failure almost invariably stems from interface misuse, unmanaged clock domain crossings outside the IP perimeter, or unstable reset timing.</p>
 
@@ -13818,24 +13740,20 @@ flowchart TD
 <p>A credible roadmap strikes a delicate balance between backward compatibility and technical innovation. For TinyEdge-NPU, architectural stability is prioritized across control interfaces (AXI-Lite) and basic programmer models, while math acceleration capabilities and energy efficiency scale forward. The four-generation trajectory below illustrates this progression:</p>
 
 <div class="mermaid">
-timeline
-    title TinyEdge-NPU Multi-Year Roadmap
-    section 2024 : v1.0 Baseline
-        Tapeout Proof : INT8 core, 64 MACs, 28nm
-        Interfaces : AXI-Lite, &lt;5 mW, 1 mm²
-        Workloads : Keyword Spotting (KWS), Acoustic Event Detection
-    section 2025 : v1.1 Optimization
-        Compression : INT4 weight unpacking engine
-        Footprint : 100% pin and register backward compatible
-        Power : Dynamic clock gating tuning, 4.1 mW
-    section 2026 : v2.0 Performance
-        Compute Scaling : 128 MACs, Multi-channel audio (4-mic beamforming)
-        Memory : AXI4 Master DMA interface added
-        Area / Power : 1.6 mm² in 28nm, 8.5 mW peak
-    section 2027 : v2.1 Low-Leakage
-        Retention Mode : Sub-20 µW deep sleep island
-        Porting : TSMC 22ULL and 16FFC process nodes
-</div>
+flowchart LR
+    subgraph Y2024["2024: v1.0 Baseline"]
+        V10["<b>Tapeout Proof</b><br/>INT8 core, 64 MACs, 28nm<br/>AXI-Lite, &lt;5 mW, 1.0 mm²<br/>KWS &amp; Acoustic Event Detection"]
+    end
+    subgraph Y2025["2025: v1.1 Optimization"]
+        V11["<b>Drop-In Compression</b><br/>INT4 weight unpacking (~40% SRAM cut)<br/>100% pin &amp; register compatible<br/>Clock-gating tuning (4.1 mW)"]
+    end
+    subgraph Y2026["2026: v2.0 Performance"]
+        V20["<b>Architectural Scale-Up</b><br/>128 MACs, 4-mic beamforming<br/>AXI4 Master DMA streaming<br/>1.6 mm² in 28nm, 8.5 mW peak"]
+    end
+    subgraph Y2027["2027: v2.1 Low-Leakage"]
+        V21["<b>Ultra-Low Leakage</b><br/>Sub-20 µW retention sleep island<br/>Ported to 22ULL &amp; 16FFC nodes"]
+    end
+    V10 --> V11 --> V20 --> V21</div>
 
 <p>Notice the intentional separation of release types. Version 1.1 provides drop-in RTL compatibility: existing bus wrappers, synthesis scripts, and bare-metal firmware drivers require zero modifications. Customers can drop the updated core into an existing mask set revision to cut weight SRAM storage by nearly 40% through INT4 compression. In contrast, Version 2.0 introduces an architectural break: the compute array expands to 128 MACs, an AXI4 Master interface is introduced to stream multi-channel audio data without CPU intervention, and the software driver requires an updated memory-mapped interface. Version 2.1 focuses on the leakage-critical edge market, implementing dedicated power-gating retention cells to drop sleep power from the v1.0 baseline of &lt;100 &mu;W down to &lt;20 &mu;W.</p>
 
@@ -13972,14 +13890,13 @@ timeline
 <div class="mermaid">
 flowchart TD
     A[Customer Receives Patent Infringement Claim] --> B{Did Customer Modify Core RTL?}
-    B -- Yes --> C[Indemnity Voided: Customer Defends]
+    B -- Yes --> C["Indemnity Voided: Customer Defends"]
     B -- No --> D{Was IP Combined with Unapproved External Blocks?}
     D -- Yes --> E[Indemnity Voided / Shared Allocation]
     D -- No --> F[Vendor Defends Claim]
     F --> G[Financial Liability Capped at Cap Limit]
-    G --> H[Standard Cap: 1x - 2x License Fees Paid]
-    G --> I[Super-Cap: Explicit $1M - $2M Ceiling]
-</div>
+    G --> H["Standard Cap: 1x - 2x License Fees Paid"]
+    G --> I["Super-Cap: Explicit $1M - $2M Ceiling"]</div>
 
 <p>The standard compromise in mid-tier semiconductor deals is a <strong>Super-Cap</strong>. While general commercial liabilities (e.g., breach of delivery schedule) are capped strictly at 1.0x the fees paid in the prior 12 months, the IP indemnification cap is broken out into a separate bucket, typically capped at 2x to 4x total contract value, or pegged to a fixed dollar figure (such as $1,000,000 to $2,500,000), supported by an Errors &amp; Omissions (E&amp;O) / IP liability insurance policy.</p>
 
@@ -14324,12 +14241,11 @@ flowchart TD
         A --> D[4 in High-Volume Mass Production]
     end
     subgraph Year 3 Revenue Engine: $3.48M ARR
-        D --> E[Royalty Inflow: $2.15M / yr]
-        B --> F[New License Fees: $900k / yr]
-        A --> G[Annual Maintenance SLAs: $162k / yr]
-        B & C --> H[Integration Support / NRE: $270k / yr]
-    end
-</div>
+        D --> E["Royalty Inflow: $2.15M / yr"]
+        B --> F["New License Fees: $900k / yr"]
+        A --> G["Annual Maintenance SLAs: $162k / yr"]
+        B & C --> H["Integration Support / NRE: $270k / yr"]
+    end</div>
 
 <ul>
   <li><strong>Deal Pipeline &amp; Customer Footprint:</strong> 12 total signed commercial licensing agreements. Four licensees have entered high-volume mass production (delivering consumer hearables, smart thermostats, and industrial pump-monitoring sensors), accounting for a collective run rate of 61.4 million units annually. Two licensees are debugging first-silicon samples, and six are in active SoC integration.</li>
@@ -14391,18 +14307,17 @@ Engineering retrospectives often focus on timing closure or verification bugs, b
 
 <div class="mermaid">
 flowchart TD
-    A[Market Spec & Requirements] -->|10x Cost Multiplier per Stage| B[Architecture & Sizing]
-    B --> C[RTL Design & CDC]
+    A["Market Spec & Requirements"] -->|10x Cost Multiplier per Stage| B["Architecture & Sizing"]
+    B --> C["RTL Design & CDC"]
     C --> D[Verification Closure]
-    D --> E[DFT & Backend Implementation]
+    D --> E["DFT & Backend Implementation"]
     E --> F[Testchip Silicon Validation]
-    F --> G[Volume Production & Yield]
+    F --> G["Volume Production & Yield"]
     
     style A fill:#e1f5fe,stroke:#0288d1
     style D fill:#fff3e0,stroke:#f57c00
     style F fill:#ffebee,stroke:#d32f2f
-    style G fill:#f3e5f5,stroke:#7b1fa2
-</div>
+    style G fill:#f3e5f5,stroke:#7b1fa2</div>
 
 <h3 id="ch17-sec-1">17.1 The Biggest Mistakes Teams Make Across the Full Flow</h3>
 
@@ -14553,22 +14468,21 @@ sequenceDiagram
 
 <div class="mermaid">
 flowchart LR
-    subgraph Upstream [Architecture & RTL]
+    subgraph Upstream ["Architecture & RTL"]
         A[Customer Spec] --> B[ML Design-Space<br/>Exploration]
         B --> C[LLM-Assisted<br/>RTL Generation]
     end
-    subgraph Verification [Verification & Implementation]
+    subgraph Verification ["Verification & Implementation"]
         C --> D[RL-Driven<br/>Coverage Closure]
-        D --> E[ML Placement &<br/>Timing Prediction]
+        D --> E["ML Placement &<br/>Timing Prediction"]
     end
-    subgraph Delivery [Silicon & Support]
+    subgraph Delivery ["Silicon & Support"]
         E --> F[Automated RAG<br/>Customer Support]
     end
     
     style B fill:#e8f5e9,stroke:#388e3c
     style D fill:#e8f5e9,stroke:#388e3c
-    style E fill:#e8f5e9,stroke:#388e3c
-</div>
+    style E fill:#e8f5e9,stroke:#388e3c</div>
 
 <h5>1. Market Research: Automated Domain Benchmarking</h5>
 <p>Traditionally, extracting the competitive IP picture meant manually downloading hundreds of microcontroller and NPU datasheets, compiling microarchitectural parameters into spreadsheets, and normalizing performance metrics. Machine learning-driven natural language systems combined with Retrieval-Augmented Generation (RAG) now parse thousands of pages of academic conference proceedings (e.g., ISSCC, VLSI, NeurIPS), patent filings, and vendor datasheets. For TinyEdge-NPU, an internal RAG pipeline queried 48 competing ultra-low-power microcontrollers and specialized audio NPUs, accurately identifying that the competitive threshold for keyword spotting had dropped from 10&nbsp;mW to under 5&nbsp;mW in 28nm/22nm nodes, with an average weight buffer density of 32&nbsp;KB. <em>Where it fails:</em> AI systems regularly hallucinate proprietary interface compatibility (e.g., claiming a competitor supported an undocumented native MIPI-SoundWire direct-DMA interface when it only had standard I2S), requiring strict human verification of raw source datasheets.</p>
@@ -14620,8 +14534,7 @@ flowchart TD
         MCU -->|"Activation / Weight Streams<br/>(Low-Power D2D Bus)"| NPU
         PMIC -->|"Power Domains (0.9V Core, 1.8V I/O)"| NPU
         PMIC -->|"Analog Rails"| AFE
-    end
-</div>
+    end</div>
 
 <p>However, adopting chiplets for micro-power edge devices presents a unique physical challenge: <em>interface power overhead</em>. Standard data-center UCIe-Advanced (UCIe-A) or Bunch of Wires (BoW) PHYs prioritize tens of gigabits per second per millimeter of die edge, often consuming 0.5 to 1.0 pJ/bit. For TinyEdge-NPU operating under a rigid 5 mW total active power budget, dedicating even 1 mW to physical layer transmission consumes 20% of the entire system power budget.</p>
 
@@ -16547,17 +16460,15 @@ Security Incident /
 
   async function renderMermaidInPage(pageEl) {
     if (!window.mermaid || renderedMermaid.has(pageEl.id)) return;
-    const nodes = pageEl.querySelectorAll('.mermaid');
-    if (nodes.length > 0) {
+    const nodes = Array.from(pageEl.querySelectorAll('.mermaid'));
+    for (const node of nodes) {
       try {
-        await window.mermaid.run({ nodes: Array.from(nodes) });
-        renderedMermaid.add(pageEl.id);
+        await window.mermaid.run({ nodes: [node] });
       } catch (e) {
-        console.warn('Mermaid render warning:', e);
+        console.warn('Mermaid render warning on node:', e);
       }
-    } else {
-      renderedMermaid.add(pageEl.id);
     }
+    renderedMermaid.add(pageEl.id);
   }
 
   function showPage(pageId, anchorId, updateHash = true) {
